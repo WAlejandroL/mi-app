@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# Proyecto Ciffer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> **Nota:** El manejo de errores y reintentos automáticos en la conexión a la base de datos se realiza con la librería `tenacity` en el archivo `python/connection.py`.
 
-## Available Scripts
+## Estructura del Proyecto
 
-In the project directory, you can run:
+- **frontend (React):**
+  - Carpeta `src/`: Contiene la aplicación React, incluyendo el formulario de login (`App.js`).
+- **backend (Python):**
+  - Carpeta `python/`: Incluye los archivos para la API Flask (`api.py`), la lógica de login (`loggin.py`), y la conexión a MongoDB Atlas (`connection.py`).
+- **Base de datos:**
+  - MongoDB Atlas, donde se almacenan los usuarios registrados.
 
-### `npm start`
+## Descripción General
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Este proyecto es un cifrador de archivos que permite el acceso únicamente a usuarios registrados en la base de datos.  
+Está pensado como una **aplicación de escritorio** para brindar mayor seguridad y facilidad de uso a los usuarios finales.  
+Los usuarios deben iniciar sesión mediante el formulario de login. La autenticación se realiza contra la base de datos MongoDB Atlas usando una API desarrollada en Flask.  
+Una vez autenticados, los usuarios podrán acceder a las funcionalidades de cifrado de archivos.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+El manejo de errores en la conexión a la base de datos utiliza la librería `tenacity`, lo que permite reintentar la conexión automáticamente en caso de fallos temporales.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Para más detalles sobre cómo iniciar y usar el proyecto, consulta la documentación específica de cada parte:
 
-### `npm run build`
+- **Frontend (React):** [Documentación de Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
+- **Backend (Python):** Revisa los comentarios en el código de los archivos en la carpeta `python/`.
+- **Base de datos (MongoDB Atlas):** [Documentación de MongoDB Atlas](https://docs.atlas.mongodb.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Instrucciones Específicas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 1. Configuración del Entorno
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Asegúrate de tener instaladas las dependencias necesarias tanto para el frontend como para el backend.
+- Crea un archivo `.env` en la carpeta `python/` con la configuración adecuada para la conexión a tu base de datos MongoDB Atlas. Usa el archivo `.env.example` como referencia.
 
-### `npm run eject`
+### 2. Ejecución del Proyecto
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Frontend (React)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+cd frontend
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Backend (Python)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+cd backend
+pip install -r requirements.txt
+python api.py
+```
 
-## Learn More
+### 3. Acceso a la Aplicación
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Una vez que el frontend y el backend estén en funcionamiento, abre tu navegador y ve a `http://localhost:3000` para acceder a la aplicación.
+- Usa las credenciales de un usuario registrado para iniciar sesión.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. Cifrado de Archivos
 
-### Code Splitting
+- Después de iniciar sesión, podrás acceder a la funcionalidad de cifrado de archivos.
+- Selecciona un archivo desde el frontend y el sistema lo cifrará usando la clave pública del usuario.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 5. Descifrado de Archivos
 
-### Analyzing the Bundle Size
+- Para descifrar un archivo, súbelo a la sección de descifrado en el frontend.
+- El archivo será procesado y se descargará automáticamente una vez descifrado.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## Notas Adicionales
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- El proyecto utiliza `React Router` para la navegación entre el formulario de login y las funcionalidades de cifrado/descifrado.
+- Se recomienda usar un navegador moderno y actualizado para evitar problemas de compatibilidad.
+- Para cualquier duda o problema, revisa los issues abiertos en el repositorio o crea uno nuevo describiendo tu situación.
 
-### Advanced Configuration
+## Licencia
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
