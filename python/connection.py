@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from tenacity import retry, stop_after_attempt, wait_fixed
 
 # Reemplaza con tu cadena de conexión de MongoDB Atlas
-MONGODB_URI = "mongodb+srv://brianlopez7475:040302wb@cluster0.jpyadpc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGODB_URI = "mongodb+srv://brianlopez7475:<password>@cluster0.jpyadpc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
 def get_mongo_client():
